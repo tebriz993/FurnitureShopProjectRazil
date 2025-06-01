@@ -1,0 +1,65 @@
+﻿@model FurnitureShopProjectRazil.Models.Home
+@{
+    ViewData["Title"] = "Ana Səhifə";
+
+    // Model null olduqda və ya xüsusiyyətləri boş olduqda istifadə ediləcək standart dəyərlər
+    string heroTitle;
+    if (Model != null && !string.IsNullOrEmpty(Model.Title))
+    {
+        // Admin tərəfindən daxil edilmiş başlıq HTML ola bilər (məsələn, span ilə).
+        // Bu səbəbdən @Html.Raw istifadə edəcəyik.
+        heroTitle = Model.Title;
+    }
+    else
+    {
+        // Standart başlıq (model olmadıqda və ya Model.Title boş olduqda)
+        heroTitle = "Modern Interior <span class=\"d-block\">Design Studio</span>";
+    }
+
+    string heroSubtitle = (Model != null && !string.IsNullOrEmpty(Model.Subtitle))
+        ? Model.Subtitle
+        : "Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.";
+
+    string heroImagePath;
+    string heroImageAlt;
+    if (Model != null && !string.IsNullOrEmpty(Model.ImagePath))
+    {
+        heroImagePath = Url.Content(Model.ImagePath); // ~/uploads/home_images/image.jpg -> /uploads/home_images/image.jpg
+        heroImageAlt = string.IsNullOrEmpty(Model.Title) ? "Hero Image" : Model.Title;
+    }
+    else
+    {
+        heroImagePath = Url.Content("~/assets/images/couch.png"); // Standart şəkil
+        heroImageAlt = "Default Hero Image";
+    }
+}
+
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>@Html.Raw(heroTitle)</h1> @* Model.Title HTML ehtiva edə biləcəyi üçün Html.Raw istifadə olunur *@
+                    <p class="mb-4">@heroSubtitle</p>
+                    <p><a href="#" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img src="@heroImagePath" class="img-fluid" alt="@heroImageAlt">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+@* Ana səhifənizin digər hissələrini buraya əlavə edə bilərsiniz *@
+@* Məsələn: *@
+@*
+<div class="container mt-5">
+    <h2>Welcome to our Furniture Shop!</h2>
+    <p>Explore our latest collections.</p>
+</div>
+*@

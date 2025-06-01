@@ -1,0 +1,203 @@
+﻿@model FurnitureShopProjectRazil.Models.About
+@{
+    ViewData["Title"] = "About Us";
+}
+
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>@ViewData["Title"]</h1>
+                    @if (Model != null && !string.IsNullOrEmpty(Model.Subtitle))
+                    {
+                        <p class="mb-4">@Model.Subtitle</p>
+                    }
+                    else
+                    {
+                        <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                    }
+                    <p><a asp-controller="Shop" asp-action="Index" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    @if (Model != null && !string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="~/@Model.ImagePath" alt="@Model.Title" class="img-fluid">
+                    }
+                    else
+                    {
+                        <img src="~/images/couch.png" class="img-fluid">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+<!-- Start Why Choose Us Section -->
+<div class="why-choose-section">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-lg-6">
+                @if (Model != null && !string.IsNullOrEmpty(Model.Title))
+                {
+                    <h2 class="section-title">@Model.Title</h2>
+                }
+                else
+                {
+                    <h2 class="section-title">Why Choose Us</h2>
+                }
+
+                @if (Model != null && !string.IsNullOrEmpty(Model.Subtitle)) @* Bu hissəni də Model.Description və ya başqa bir property ilə əvəz edə bilərsiniz *@
+                {
+                    @*<p>@Model.Subtitle</p>  About modelində ümumi description yoxdur, Title altındakı Subtitle-ı istifadə etdik*@
+                }
+                else
+                {
+                    @* <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p> *@
+                }
+
+
+                <div class="row my-5">
+                    @if (Model != null)
+                    {
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    @if (!string.IsNullOrEmpty(Model.Icon1) && Model.Icon1.StartsWith("<svg"))
+                                    {
+                                        @Html.Raw(Model.Icon1)
+                                    }
+                                    else if (!string.IsNullOrEmpty(Model.Icon1))
+                                    {
+                                        <img src="~/@Model.Icon1" alt="@Model.Title1" class="imf-fluid">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/truck.svg" alt="Image" class="imf-fluid">
+                                    }
+                                </div>
+                                <h3>@Model.Title1</h3>
+                                <p>@Model.Subtitle1</p>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    @if (!string.IsNullOrEmpty(Model.Icon2) && Model.Icon2.StartsWith("<svg"))
+                                    {
+                                        @Html.Raw(Model.Icon2)
+                                    }
+                                    else if (!string.IsNullOrEmpty(Model.Icon2))
+                                    {
+                                        <img src="~/@Model.Icon2" alt="@Model.Title2" class="imf-fluid">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/bag.svg" alt="Image" class="imf-fluid">
+                                    }
+                                </div>
+                                <h3>@Model.Title2</h3>
+                                <p>@Model.Subtitle2</p>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    @if (!string.IsNullOrEmpty(Model.Icon3) && Model.Icon3.StartsWith("<svg"))
+                                    {
+                                        @Html.Raw(Model.Icon3)
+                                    }
+                                    else if (!string.IsNullOrEmpty(Model.Icon3))
+                                    {
+                                        <img src="~/@Model.Icon3" alt="@Model.Title3" class="imf-fluid">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/support.svg" alt="Image" class="imf-fluid">
+                                    }
+                                </div>
+                                <h3>@Model.Title3</h3>
+                                <p>@Model.Subtitle3</p>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon">
+                                    @if (!string.IsNullOrEmpty(Model.Icon4) && Model.Icon4.StartsWith("<svg"))
+                                    {
+                                        @Html.Raw(Model.Icon4)
+                                    }
+                                    else if (!string.IsNullOrEmpty(Model.Icon4))
+                                    {
+                                        <img src="~/@Model.Icon4" alt="@Model.Title4" class="imf-fluid">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/return.svg" alt="Image" class="imf-fluid">
+                                    }
+                                </div>
+                                <h3>@Model.Title4</h3>
+                                <p>@Model.Subtitle4</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- Model null olarsa default məzmun (lazım olarsa) -->
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon"><img src="~/images/truck.svg" alt="Image" class="imf-fluid"></div>
+                                <h3>Fast & Free Shipping</h3>
+                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon"><img src="~/images/bag.svg" alt="Image" class="imf-fluid"></div>
+                                <h3>Easy to Shop</h3>
+                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon"><img src="~/images/support.svg" alt="Image" class="imf-fluid"></div>
+                                <h3>24/7 Support</h3>
+                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <div class="feature">
+                                <div class="icon"><img src="~/images/return.svg" alt="Image" class="imf-fluid"></div>
+                                <h3>Hassle Free Returns</h3>
+                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="img-wrap">
+                    @if (Model != null && !string.IsNullOrEmpty(Model.ImagePath)) @* About üçün ikinci bir şəkil yoxdur, hero sectiondakı şəkli və ya sabit bir şəkli istifadə edə bilərik *@
+                    {
+                        @* <img src="~/@Model.ImagePath" alt="Why Choose Us" class="img-fluid"> *@
+                        <img src="~/images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+                    }
+                    else
+                    {
+                        <img src="~/images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End Why Choose Us Section -->

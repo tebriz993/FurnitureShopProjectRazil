@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FurnitureShopProjectRazil.Models.Services>
+
+@{
+    ViewData["Title"] = "Xidmətlərimiz";
+    // Hero section üçün standart şəkil yolu (əgər dinamik deyilsə)
+    string heroImageUrl = Url.Content("~/images/couch.png"); // Bu şəklin wwwroot/images altında olduğundan əmin olun
+}
+
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>@ViewData["Title"]</h1> @* Və ya istəsəniz statik "Services" yaza bilərsiniz *@
+                    <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                    <p><a href="#" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img src="@heroImageUrl" class="img-fluid" alt="Services Hero Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+<!-- Start Why Choose Us Section -->
+<div class="why-choose-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-3">Niyə Bizi Seçməlisiniz?</h2>
+                <p>Burada şirkətinizin üstünlükləri haqqında qısa məlumat yerləşdirə bilərsiniz.</p>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var service in Model)
+                {
+                    <div class="col-6 col-md-6 col-lg-3 mb-4">
+                        <div class="feature">
+                            <div class="icon">
+                                @* 
+                                    service.Icon dəyərinin ~/images/icons/truck.svg kimi bir yol saxladığını fərz edirik.
+                                    Əgər icon tam HTML (məsələn, <i class="fas fa-truck"></i>) saxlayırsa, @Html.Raw(service.Icon) istifadə edin.
+                                    Burada sadəcə şəkil yolu olduğunu fərz edirik.
+                                *@
+                                @if (!string.IsNullOrEmpty(service.Icon))
+                                {
+                                    <img src="@Url.Content(service.Icon)" alt="@service.Title" class="imf-fluid">
+                                    @* Əgər service.Icon yalnız fayl adıdırsa (məs. truck.svg) və bütün ikonlar eyni qovluqdadırsa:
+                                       <img src="@Url.Content($"~/images/icons/{service.Icon}")" alt="@service.Title" class="imf-fluid">
+                                    *@
+                                }
+                            </div>
+                            <h3>@service.Title</h3>
+                            <p>@service.Subtitle</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>Hazırda heç bir xidmət mövcud deyil.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- End Why Choose Us Section -->
+
+@*
+    Sizin təqdim etdiyiniz HTML-də Product Section da var idi.
+    Əgər onu da bu səhifədə göstərmək istəyirsinizsə,
+    kommentdən çıxarıb məzmununu doldura bilərsiniz.
+    Nümunə olaraq saxlayıram:
+*@
+
+@*
+<!-- Start Product Section -->
+<div class="product-section pt-0">
+    <div class="container">
+        <div class="row">
+            <!-- Start Column 1 -->
+            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <h2 class="mb-4 section-title">Crafted with excellent material.</h2>
+                <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. </p>
+                <p><a href="#" class="btn">Explore</a></p>
+            </div>
+            <!-- End Column 1 -->
+            <!-- Digər məhsul sütunları... -->
+        </div>
+    </div>
+</div>
+<!-- End Product Section -->
+*@

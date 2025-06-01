@@ -1,0 +1,75 @@
+﻿@model IEnumerable<FurnitureShopProjectRazil.Models.Team>
+
+@{
+    ViewData["Title"] = "Komandamız";
+}
+
+<!-- Start Team Section -->
+<div class="untree_co-section">
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-lg-5 mx-auto text-center">
+                <h2 class="section-title">@ViewData["Title"]</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var member in Model)
+                {
+                    <!-- Start Column -->
+                    <div class="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
+                        @if (!string.IsNullOrEmpty(member.ImagePath))
+                        {
+                            <img src="@Url.Content(member.ImagePath)" class="img-fluid mb-5" alt="@member.Fullname">
+                        }
+                        else
+                        {
+                            @* Standart şəkil yolu, məsələn wwwroot/images/default_person.png *@
+                            <img src="@Url.Content("~/images/default_person.png")" class="img-fluid mb-5" alt="Şəkil yoxdur">
+                        }
+
+                        <h3><a href="#">@member.Fullname</a></h3> @* Orijinal HTML-də "clas" yazılmışdı, "class" olmalıydı amma <a> içində olduğu üçün lazım deyil *@
+
+                        @if (member.Profession != null && !string.IsNullOrEmpty(member.Profession.Name))
+                        {
+                            <span class="d-block position mb-4">@member.Profession.Name</span>
+                        }
+                        else
+                        {
+                            <span class="d-block position mb-4">Peşə təyin edilməyib</span>
+                        }
+
+                        @if (!string.IsNullOrEmpty(member.Biography))
+                        {
+                            <p>
+                                @* Bioqrafiyanı qısaltmaq olar, məsələn: *@
+                                @(member.Biography.Length > 100 ? member.Biography.Substring(0, 100) + "..." : member.Biography)
+                            </p>
+                        }
+                        else
+                        {
+                            <p>Bioqrafiya daxil edilməyib.</p>
+                        }
+
+                        @* "Learn More" hissəsi çıxarıldı *@
+                        @* 
+                        Original:
+                        <p class="mb-0"><a href="#" class="more dark">Learn More <span class="icon-arrow_forward"></span></a></p>
+                        *@
+                    </div>
+                    <!-- End Column -->
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>Hazırda komanda üzvü mövcud deyil.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- End Team Section -->
